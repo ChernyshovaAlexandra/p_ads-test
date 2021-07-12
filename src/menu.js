@@ -129,7 +129,7 @@ function selectTexture(number, context) {
 
     stairsPic.texture = textureCur;
 
-    const time = .8;
+    const time = .7;
     TweenMax.fromTo(stairsPic, time, { y: -100, alpha: 0.0 }, { y: -39, alpha: 1.0 });
     item.image.texture = item.alternateTexture
 }

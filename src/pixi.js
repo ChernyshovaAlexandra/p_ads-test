@@ -2,7 +2,7 @@ import gsap from 'gsap'
 import * as PIXI from 'pixi.js';
 
 import { menuItemAppearance } from './menu'
-import { background, buttonPic, austinPic, logoPic, stairsPic, hummerPic, flower } from './textures'
+import { background, buttonPic, austinPic, logoPic, stairsPic, hummerPic, flower, pointer } from './textures'
 import { Layer } from '@pixi/layers'
 import { final, graphics } from './final'
 let layer = new Layer();
@@ -48,40 +48,68 @@ function onButtonOut() {
 
 buttonPic.scale.x = 1.15
 buttonPic.scale.y = 1.15
+// gsap.to(buttonPic, time, { ease: "back.out", x: container._width - 320, repeat: -1, yoyo: true });
+gsap.fromTo(buttonPic.scale,
+    {
+        x: 1, y: 1,
+    },
+    {
+        duration: .8, x: 1.1, y: 1.1, repeat: -1, yoyo: true
+    });
+// ------------------
+// old animation
+// ------------------
+// let scaleSize = 0.004,
+//     flag = false
 
-
-let scaleSize = 0.004,
-    flag = false
-
-
-app.ticker.add((delta) => {
-    if (buttonPic.scale.x >= 1.15 || buttonPic.scale.x <= 1) {
-        flag = !flag
-    }
-    if (!flag) {
-        buttonPic.scale.x += scaleSize
-        buttonPic.scale.y += scaleSize
-    }
-    if (flag) {
-        buttonPic.scale.x -= scaleSize
-        buttonPic.scale.y -= scaleSize
-    }
-});
-
+// app.ticker.add((delta) => {
+//     if (buttonPic.scale.x >= 1.15 || buttonPic.scale.x <= 1) {
+//         flag = !flag
+//     }
+//     if (!flag) {
+//         buttonPic.scale.x += scaleSize
+//         buttonPic.scale.y += scaleSize
+//     }
+//     if (flag) {
+//         buttonPic.scale.x -= scaleSize
+//         buttonPic.scale.y -= scaleSize
+//     }
+// });
+let showPointer = true
 
 setTimeout(() => {
     container.addChild(hummerPic)
-    gsap.to(hummerPic, { duration: 1, ease: "bounce.out", y: 270 });
-}, 15)
+    gsap.to(hummerPic, {
+        duration: 1, ease: "bounce.out", y: 270,
+    });
+
+
+}, 1500)
+
+setTimeout(() => {
+    const time = .7
+    if (showPointer) {
+        container.addChild(pointer);
+        gsap.to(pointer, time, { ease: "back.out", x: container._width - 320, repeat: -1, yoyo: true })
+    }
+
+}, 2500)
+
 hummerPic
     .on('pointerdown', clickHummer)
 
 
 function clickHummer() {
-    container.removeChild(hummerPic)
+    showPointer = false
+    container.removeChild(hummerPic, pointer)
     menuItemAppearance()
     hummerPic.texture = ''
 }
+
+
+pointer.x = container._width - 300
+pointer.y = container._height / 2
+pointer.rotation = 45
 
 
 

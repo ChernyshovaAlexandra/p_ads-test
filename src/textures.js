@@ -6,7 +6,7 @@ import button from './images/btn.png'
 import stairs from './images/stairs.png'
 import dec1 from './images/dec_1.png'
 import hummer from './images/icon_hammer.png'
-
+import pointerImg from './images/pointer.png'
 
 
 
@@ -18,8 +18,12 @@ const img3 = PIXI.Texture.from(button);
 const img4 = PIXI.Texture.from(stairs);
 const img5 = PIXI.Texture.from(dec1)
 const img6 = PIXI.Texture.from(hummer)
+const img9 = PIXI.Texture.from(pointerImg)
 
 
+const pointer = new PIXI.Sprite(img9)
+pointer.pivot.x = .5
+pointer.pivot.y = .5
 
 const austinPic = new PIXI.Sprite(img1);
 austinPic.x = 690
@@ -60,5 +64,5 @@ hummerPic.buttonMode = true;
 
 const background = new PIXI.Sprite(texture);
 export {
-    buttonPic, austinPic, logoPic, stairsPic, hummerPic, flower, background
+    buttonPic, austinPic, logoPic, stairsPic, hummerPic, flower, background, pointer
 }

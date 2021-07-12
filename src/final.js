@@ -9,6 +9,7 @@ graphics.endFill();
 
 const opacity = new PIXI.filters.AlphaFilter(.6);
 const invisible = new PIXI.filters.AlphaFilter(0);
+const visible = new PIXI.filters.AlphaFilter(1);
 const final = new PIXI.Container()
 
 graphics.filters = [invisible]
@@ -25,4 +26,4 @@ finalMessage.pivot.y = graphics.height / 2
 finalMessage.zIndex = 1
 
 
-export { final, finalMessage, graphics, opacity }
+export { final, finalMessage, graphics, opacity, invisible,visible }

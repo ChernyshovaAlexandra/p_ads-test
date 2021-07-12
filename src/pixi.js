@@ -66,8 +66,6 @@ app.ticker.add((delta) => {
         buttonPic.scale.x -= scaleSize
         buttonPic.scale.y -= scaleSize
     }
-
-
 });
 
 
@@ -84,7 +82,6 @@ function clickHummer() {
     menuItemAppearance()
     hummerPic.texture = ''
 }
-
 
 
 

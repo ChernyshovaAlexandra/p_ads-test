@@ -12,7 +12,7 @@ import gradient1 from './images/shape-gradient1.png'
 import gradient2 from './images/shape-gradient2.png'
 import { stairsPic, menu, container, hummerPic, app } from './pixi'
 import gsap from 'gsap'
-import { final, finalMessage, graphics, opacity } from './final'
+import { final, finalMessage, graphics, opacity, visible, invisible } from './final'
 
 
 import btnOk from './images/ok-btn.png'
@@ -74,7 +74,7 @@ OkButton.y = 110
 OkButton.anchor.set(.5)
 OkButton.interactive = true
 OkButton.buttonMode = true
-OkButton.on('pointerdown', () => { acceptTexture() })
+OkButton.on('pointerdown', () => {acceptTexture() })
 
 menuItemContainer.addChild(menuItem1.image, stairsLilIcon1)
 menuItemContainer2.addChild(menuItem2.image, stairsLilIcon2)
@@ -123,10 +123,14 @@ function selectTexture(number, context) {
     menuItem2.image.texture = menuItem1.texture
     menuItem3.image.texture = menuItem1.texture
     let textureCur, item;
-    number == 1 ? (textureCur = img4_1, item = menuItem1) :
-        number == 2 ? (textureCur = img4_2, item = menuItem2) :
-            number == 3 ? (textureCur = img4_3, item = menuItem3) : false
+    number == 1 ? (textureCur = img4_1, item = menuItem1, menuItemContainer.interactive = false) :
+        number == 2 ? (textureCur = img4_2, item = menuItem2, menuItemContainer2.interactive = false) :
+            number == 3 ? (textureCur = img4_3, item = menuItem3, menuItemContainer3.interactive = false) : false
+
     stairsPic.texture = textureCur;
+
+    const time = .8;
+    TweenMax.fromTo(stairsPic, time, { y: -100, alpha: 0.0 }, { y: -39, alpha: 1.0 });
     item.image.texture = item.alternateTexture
 }
 
@@ -155,7 +159,6 @@ function acceptTexture() {
                     x: graphics.width,
                     y: graphics.height - 70
                 })
-
             graphics.zIndex = 0
         }, 300);
     }, 100)
